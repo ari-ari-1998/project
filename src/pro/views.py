@@ -20,7 +20,7 @@ def CreateView(request):
     if request.POST:
         company = request.POST["company"]
         company_id = request.POST["company_id"]
-        company_password = request.POST["company_password"]
+        company_password = request.POST["company_passowrd"]
 
     #受け取った値で必要な処理を行います
         
