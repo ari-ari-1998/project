@@ -8,8 +8,28 @@
 </head>
 
 <body>
-    <h1>リストページ</h1>
-    <a href={% url 'create' %}>List Page</a>
+    <a href={% url 'create' %}>新規登録</a>
+    {% for obj in object_list %}
+    <div>
+        <div>
+            <p>
+                {{ obj.company }}
+            </p>
+            <p>
+                {{ obj.company_id }}
+            </p>
+            <p>
+                {{ obj.company_password }}
+            </p>
+            <a href={% url 'update' obj.pk %}>
+                編集
+            </a>
+            <a href={% url 'delete' obj.pk %}>
+                削除
+            </a>
+        </div>
+    </div>
+    {% endfor %}
 </body>
 
 </html>

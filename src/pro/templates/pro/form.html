@@ -8,10 +8,15 @@
 </head>
 
 <body>
+    <h1>
+        {% if object %}
+        「{{ object.company }}」の編集
+        {% else %}
+        新規作成
+        {% endif %}
+    </h1>
     <form method="POST">{% csrf_token %}
-        <input type="text" name="company" />
-        <input type="text" name="company_id" />
-        <input type="text" name="company_password" />
+        {{ form.as_p }}
         <button type="submit">送信</button>
     </form>
 </body>
