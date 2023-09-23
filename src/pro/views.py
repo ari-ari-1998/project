@@ -3,6 +3,7 @@ from .models import NippoModel
 from .forms import  NippoFormClass
 from django.shortcuts import redirect
 
+    
 
 def ListView(request):
     template_name = "pro/list.html"
@@ -10,7 +11,6 @@ def ListView(request):
     qs = NippoModel.objects.all()
     ctx["object_list"] = qs
     return render(request, template_name, ctx)
-
 
 
 def DetailView(request, pk):
@@ -62,3 +62,8 @@ def DeleteView(request, pk):
         obj.delete()
         return redirect("list")
     return render(request, template_name, ctx)
+
+
+
+
+
