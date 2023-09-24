@@ -10,20 +10,24 @@
 </head>
 
 <body>
-    <a href={% url 'create' %}>企業登録</a>
+    <header>
+        <a href={% url 'create' %}>企業登録</a>
+    </header>
+    <h1>企業一覧</h1>
     {% for obj in object_list %}
-    <div>
-        <div>
+    <div class="list-out">
+        <div class="list">
             <p>
                 {{ obj.company }}
             </p>
-            <p>
+            <p id="copy">
                 {{ obj.company_id }}
             </p>
-            <p>
+            <p id="copy">
                 {{ obj.company_password }}
             </p>
-            <a href={% url 'update' obj.pk %}>
+
+            <a href={% url 'update' obj.pk %} id="botton">
                 編集
             </a>
             <a href={% url 'delete' obj.pk %}>
@@ -31,7 +35,56 @@
             </a>
         </div>
     </div>
+
     {% endfor %}
+
+    <!--
+        <button onclick="copy()">コピー</button>
+        <script>
+        function copy() {
+            // ↓ Rangeオブジェクト作成
+            let range = document.createRange();
+            // ↓ コピーする要素を取得
+            let copyTarget = document.getElementById("copy");
+            // ↓ #copyの要素全体を選択
+            range.selectNodeContents(copyTarget);
+            // ↓ 選択した要素(ノード)の文字列を取得(selectionオブジェクトを取得)
+            let selection = document.getSelection();
+            // ↓ 選択した範囲を解除(これがないと次のaddRangeが上手く動かない)
+            selection.removeAllRanges();
+            // ↓ selectionオブジェクトにrangeオブジェクトを追加
+            selection.addRange(range);
+
+            document.execCommand("copy");// クリップボードにコピー
+            selection.removeAllRanges();// テキスト選択を解除
+            // コピーをお知らせする
+            alert("テキストをコピーしました");
+        }
+        document.getElementById("copy").addEventListener("click", copy);
+
+    </script>
+    -->
+
+    <!--
+         コピー対象要素とコピーボタン 
+    <input id="copyTarget" type="text" value={{ obj.company }}>
+    <button onclick="copyToClipboard()">Copy text</button>
+    <script>
+        function copyToClipboard() {
+            // コピー対象をJavaScript上で変数として定義する
+            var copyTarget = document.getElementById("copyTarget");
+
+            // コピー対象のテキストを選択する
+            copyTarget.select();
+
+            // 選択しているテキストをクリップボードにコピーする
+            document.execCommand("Copy");
+
+            // コピーをお知らせする
+            alert("コピーできました！ : " + copyTarget.value);
+        }
+    </script>
+    -->
 </body>
 
 </html>

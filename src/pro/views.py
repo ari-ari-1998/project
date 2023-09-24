@@ -66,4 +66,3 @@ def DeleteView(request, pk):
 
 
 
-
