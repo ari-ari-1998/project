@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/delete.css' %}">
     <title>Document</title>
 </head>
 
 <body>
     <form method="post">{% csrf_token %}
         <p>選択した企業を削除しますか？</p>
-        <input type="submit" value="削除する">
+        <input type="submit" value="削除する" class="botton">
     </form>
 </body>
 

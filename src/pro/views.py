@@ -2,13 +2,14 @@ from django.shortcuts import render, get_object_or_404
 from .models import NippoModel
 from .forms import  NippoFormClass
 from django.shortcuts import redirect
-
+from django.views.generic import ListView
     
 
 def ListView(request):
     template_name = "pro/list.html"
     ctx = {}
     qs = NippoModel.objects.all()
+    #qs = NippoModel.objects.filter(company__contains="愛知")
     ctx["object_list"] = qs
     return render(request, template_name, ctx)
 
@@ -63,6 +64,29 @@ def DeleteView(request, pk):
         return redirect("list")
     return render(request, template_name, ctx)
 
+def SeachView(request):
+    template_name = "pro/list.html"
+    ctx = {}
+    #qs = NippoModel.objects.all()
+    qs = NippoModel.objects.filter(company__contains="愛知")
+    ctx["object_list"] = qs
+    return render(request, template_name, ctx)
 
 
+def get_queryset(self, pk):
+        template_name = "pro/list.html"
+        ctx = {}
+        query = self.request.GET.get('query')
+        obj = get_object_or_404(NippoModel, pk=pk)
+
+        if query:
+            #obj = NippoModel.objects.filter(name__contains=query)
+            #obj = NippoModel.objects.filter(
+                #name__icontains=query)
+            qs = NippoModel.objects.filter(company__contains=query)
+            ctx["object_list"] = qs
+        else:
+            obj = NippoModel.objects.all()
+        return render(template_name, ctx)
+    
 
